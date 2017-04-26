@@ -46,12 +46,13 @@
 }
 .black{color:#000000;}
 .but{line-height:0.8rem;background-color:#002269;color:#ffffff;border-radius:0.1rem;}
-.more{width:0.16rem; position: absolute;right: 0.3rem;top: 50%;margin-top: -0.15rem;}
+.more{width:0.6rem;height: 1rem;position: absolute;right: 0.3rem;top: 40%;margin-top: -0.15rem;}
 
 
 .head{width: 1rem;height: 1rem;border:0.06rem solid #ffffff;border-radius:0.8rem;}
 .ba-img{background:url(../images/%E8%83%8C%E6%99%AFx.png) no-repeat center;background-size:cover;}
 .hig220{height:2.2rem;}
+.hig300{height:3rem;}
 .hig400{height:4rem;}
 .hig90{height:0.9rem !important;}
 .lh90{line-height:0.9rem !important;}
@@ -74,6 +75,7 @@
 /*房间管理*/
 .green{color:#06cdb8;}
 .fs12{font-size:12px;}
+.fs13{font-size:13px;}
 .fs14{font-size:14px; }
 .fs15{font-size:15px; }
 .fs16{font-size:16px; }
@@ -218,7 +220,7 @@
 
 /*银行卡*/
 .revise{position:absolute;right:0.6rem;}
-.bank{background:url(../images/工商背景.png)  no-repeat center;}
+.bank{background:url(/static//工商背景.png)  no-repeat center;}
 .hig260{height:2.6rem;}
 .bank-logo{width:2.5rem;left:10%;top: 25%;}
 .fs40{font-size:0.4rem;}
@@ -234,21 +236,20 @@
 
 /*添加银行卡*/
 .pr100{padding-right:1rem;}
-#bankCardForm input{margin-left: 140px;}
-#bankCardForm select{}
+#bankCardForm input{margin-left: 120px;}
+#bankCardForm select{width: 100px;height: 34px;position: absolute;right: 0;opacity: 0;}
 .fs20{font-size:20px;}
-
 
 /*我的订单*/
 
-.btn-order{color: #C6C6C6;background: #fff;border:1px solid #9D9D9D;}
-.img-order{width: 2rem;height: 2rem;}
-.btn-l{right: 120px;text-align: center;}
+.btn-order{color: #cf102d;background: #fff;border:1px solid #cf102d;}
+.img-order{width: 1rem;height: 1rem;}
+.btn-l{right: 120px;text-align: center;color: #C6C6C6;border:1px solid #9D9D9D;}
 .font{color: #CF102D;right: 20px;}
 
 /*订单详情*/
 .ming1{width:8rem;}
-.pl160{padding-left:7rem;}
+.pl160{padding-left:5.5rem;}
 .adress{line-height: 1.5;padding-top: 10px}
 
 /*量体数据*/

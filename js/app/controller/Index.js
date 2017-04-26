@@ -33,11 +33,11 @@ define([
         })
 
 	$("#h-orderTrick").on('click', function(){
-		location.href = "myOrder.html"
+		location.href = "order/myOrder.html"
 	});
 
 	$("#h-commissionManage").on('click', function(){
-		location.href = "reportQuery.html";
+		location.href = "account/reportQuery.html";
 	});
 
 	$("#h-aboutUs").on('click', function(){
@@ -45,11 +45,11 @@ define([
 	});
 
 	$("#h-historyOrder").on('click', function(){
-		location.href = "historyOrder.html"
+		location.href = "order/historyOrder.html"
 	});
 
 	$("#h-icon-account").on('click', function(){
-		location.href = "accountSecurity.html";
+		location.href = "user/accountSecurity.html";
 	});
 
 	//退出登录
@@ -59,15 +59,15 @@ define([
 	});
 
 	$("#revise-tel").on('click', function(){
-		location.href = "reviseTel.html";
+		location.href = "user/reviseTel.html";
 	});
 
 	$("#revise-pwd").on('click', function(){
-		location.href = "revisePwd.html";
+		location.href = "user/revisePwd.html";
 	});
 
 	$("#revise-tpwd").on('click', function(){
-		location.href = "revisetPwd.html";
+		location.href = "user/revisetPwd.html";
 	});
 
 });
