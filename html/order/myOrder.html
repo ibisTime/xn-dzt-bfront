@@ -7,15 +7,37 @@
 </head>
 
 <body class="bc ">
-	<div class=" ba  lh200 hig260 wp100 plr20 tc border-b ">
-		<div class=" inline_block mt4 fs15">全部订单</div>
-		<div class=" inline_block ml25 mt4 fs15">待量体</div>
-		<div class=" inline_block ml25 mt4 fs15">待录入</div>
-		<div class="inline_block ml25 mt4 fs15" >待复核</div>
+	<div class=" ba  lh200  wp100 plr20 tc border-b ">
+		<div class=" inline_block mt4 fs15 choose" id="allOrder">全部订单</div>
+		<div class=" inline_block ml25 mt4 fs15" id="stayLt">待量体</div>
+		<div class=" inline_block ml25 mt4 fs15" id="stayEntry">待录入</div>
+		<div class="inline_block ml25 mt4 fs15" id="stayReview">待复核</div>
 	</div>
 
-	<div class="hig1000  wp100 p-r bg_fff border-b " id="content">
+	 <div id="wrapper" class="scroll-wrapper">
+	    <div id="scroll">
+	        <div id="pullDown" class="idle">
+	            <div class="pullDownLabel">
+	                <div class="bounce1"></div>
+	                <div class="bounce2"></div>
+	                <div class="bounce3"></div>
+	                <div class="bounce4"></div>
+	            </div>
+	        </div>
+
+	       <div class=" wp100 p-r bgf0 clearfix" id="content">	</div>
+	        <div id="pullUp" class="idle">
+	            <div class="pullUpLabel">
+	                <div class="bounce1"></div>
+	                <div class="bounce2"></div>
+	                <div class="bounce3"></div>
+	                <div class="bounce4"></div>
+	            </div>
+	        </div>
+	    </div>
 	</div>
+
+
 
 	<link rel="import" href="../footer.html?__inline">
 	<script>

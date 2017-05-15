@@ -57,19 +57,17 @@ define([
         });
     }
 
-    // 获取银行select列表
+
     function getBankCode(){
-        return Ajax.get("807706", {
-            parentKey: "bank_code"
-        }).then(function(res){
+        return Ajax.get("802116").then(function(res){
             if(res.success){
                 var html = "";
                 res.data.forEach(function(item){
-                    html += '<option class="mlr30" value="'+item.dvalue+'" code="'+item.dkey+'">'+item.dvalue+'</option>';
+                    html += '<option value="'+item.bankName+'" code="'+item.bankCode+'">'+item.bankName+'</option>';
                 });
                 $("#bankName").html(html).trigger("change");
             }else{
-                base.showMsg(res.msg);
+                _showMsg(res.msg);
             }
         });
     }
@@ -103,6 +101,7 @@ define([
         $("#sbtn").on("click", function(){
             if($("#bankCardForm").valid()){
                 if(code){
+                    console.log(11)
                     editBankCard();
                 }else{
                     addBankCard();

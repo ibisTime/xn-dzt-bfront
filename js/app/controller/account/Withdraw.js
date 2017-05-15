@@ -5,7 +5,7 @@ define([
     'js/app/module/validate/validate'
 ], function(base, Ajax, loading, Validate) {
     var accountNumber, availableAmount;
-    
+
     init();
     function init(){
         loading.createLoading();
@@ -14,18 +14,18 @@ define([
     }
     function getInitData() {
         $.when(
-            getAccountList(),
-            getBankCardList()
+            getBankCardList(),
+            getAccountList()
         ).then(loading.hideLoading);
-        
+
         $("#bankcardNumber").change(function(){
     		$("#cardNumberVal").html($("#bankcardNumber option:selected").html())
     	})
-        
+
         $("#addBankCard").click(function(){
-            location.href = './add_bankcard.html';
+            location.href = '../user/add_bankcard.html';
         })
-    	
+
     }
     // 获取银行卡列表
     function getBankCardList(){
@@ -43,7 +43,7 @@ define([
                     $("#bankcardNumber").html(html);
                     $("#cardNumberVal").html($("#bankcardNumber option:selected").html())
                 }else{
-                	
+
     				$("#addBankCard").removeClass("hidden")
                     $("#bankcardNumber").remove();
                     addGoBankCardListener();
@@ -52,6 +52,11 @@ define([
                 base.showMsg(res.msg);
                 addGoBankCardListener();
             }
+        });
+    }
+    function addGoBankCardListener(){
+        $("#addBankCard").on('click', function(){
+            location.href = '../user/add_bankcard.html';
         });
     }
     // 获取账户信息
@@ -113,6 +118,10 @@ define([
         }
         param.transAmount = -param.transAmount;
         param.accountNumber = accountNumber;
+
+        // if (!param.bankcardNumber) {
+        //     base.showMsg('请先绑定银行卡');
+        // }
         loading.createLoading("提交中...");
         Ajax.post("802526", {json: param})
             .then(function(res){
@@ -122,6 +131,8 @@ define([
                     setTimeout(function(){
                         history.back();
                     }, 1000);
+                }else if(res.msg == "必填型入参，请按要求填写完整"){
+                    base.showMsg('请先绑定银行卡');
                 }else{
                     base.showMsg(res.msg);
                 }

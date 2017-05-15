@@ -41,8 +41,8 @@ define([
 					timer = setInterval(function(){
 						codeTimeNum--;
 
-						$("#newTelCode").css({"color":"#999"})
-						$("#newTelCode").html("重新发送("+codeTimeNum+")");
+						$("#newTelCode").css({"color":"#999","text-align":"center"})
+						$("#newTelCode").html(""+codeTimeNum+"s");
 
 						if(codeTimeNum<0){
 							clearInterval(timer);

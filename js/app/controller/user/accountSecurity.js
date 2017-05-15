@@ -40,4 +40,15 @@ define([
             }
         })
     })
-});
+
+    $("#charge-code").on("click",function(){
+      location.href="../account/chargeCode.html";
+  })
+
+    $("#logOut").on("click",function(){
+        base.logout();
+        location.href="login.html";
+    })
+
+
+})

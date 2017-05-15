@@ -6,48 +6,53 @@ define([
 	if(!base.getUserId()){
 		location.href="user/login.html"
 	}
-	var userId = base.getUserId();
-	var userName;//用户名
-	var userPic;//头像
-	var token;
+	var order = base.getUrlParam("code");
+	var ltUser = base.getUrlParam("ltUser");
+	var param = {};
+	var code;
 
 
-	Ajax.get("620203",{"userId":userId})
+
+	Ajax.get("620007")
 		.then(function(res) {
-            if (res.success) {
-            		token = res.data.token;
-                userName = res.data.realName;
-                userPic = res.data.pic1;
+            if (res.success){
+            	$("#price0").html(res.data[0].price/1000).closest(".param").attr("data-price",res.data[0].price);
+            	$("#price1").html(res.data[1].price/1000).closest(".param").attr("data-price",res.data[1].price);
+            	$("#price0").html(res.data[0].price/1000).closest(".param").attr("data-code",res.data[0].code);
+            	$("#price1").html(res.data[1].price/1000).closest(".param").attr("data-code",res.data[1].code);
 
-                $("#userName").html(userName);
 
-                if(userPic != null || userPic==""){
-                	$("#userPic").attr("src",PIC_PREFIX+userPic+THUMBNAIL_INDEX)
-               	}else{
-                	$("#userPic").attr("src",userImg)
-               	}
             } else {
                 base.showMsg(res.msg);
             }
         })
 
-	$("#confirm_img1").on('toggle', function(){
-		$('img').attr(src:'../images/选中蓝.png')
-		},function(){
-		$('img').attr(src:'../images/未选中.png')
-		}
-	);
 
-	$("#confirm_img2").on('toggle', function(){
-		$('#confirm_img2').attr(src:'../images/选中蓝.png')
-		},function(){
-		$('#confirm_img2').attr(src:'../images/未选中.png')
-		}
-	);
 
-	$(".confirmSub0").on('click','#confirmSub', function(){
+		$("#confirm_btn").on("click", ".param", function(e) {
+            var self = $(this), index = self.index();
+            param["price"] = self.attr("data-price");
+            param["code"] = self.attr("data-code");
+            self.find("img").attr("src", '/static/images/选中蓝.png')
+            	.end().siblings(".param").find("img").attr("src", '/static/images/未选中.png');
 
-      location.href = "Order.html;"
-    });
+        });
+
+
+		$("#confirmSub").on('click', function(){
+			code=$('#firstCode').attr("data-code");
+
+			Ajax.get("620203",{orderCode:order,modelCode:param["code"]?param["code"] :code,quantity:1,updater:ltUser})
+				.then(function(res) {
+		            if (res.success){
+
+		            	location.href = "myOrder.html";
+		            } else {
+		                base.showMsg(res.msg);
+		            }
+		        })
+
+			}
+		);
 
 });

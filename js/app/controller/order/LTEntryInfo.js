@@ -12,7 +12,6 @@ define([
         "1-9",
         "1-10",
         "1-11",
-        "3-1",
         "3-5",
         "3-6",
         "3-7",
@@ -44,7 +43,7 @@ define([
             type: "棉弹力"
         }
     ];
-    var code = base.getUrlParam("code") || "DD201704231231379918";
+    var code = base.getUrlParam("code");
     var modelCode,
         productSpecsList;
     var param = {};
@@ -180,8 +179,14 @@ define([
             param[id] = self.attr("data-code");
         });
         // 点击选择面料按钮，弹出面料选择框
-       $("#choseML").click(function() {
+       $("#choseML").click(function(e) {
            $("#modal-chose").addClass("active");
+           e.stopPropagation();
+           var self = $(this);
+           self.addClass("active").siblings("div").removeClass("active");
+           $("#entry-ml-main-cont")
+                .find(".entry-ml-main-cont" + 0).addClass("active")
+                .siblings(".active").removeClass("active");
        });
        // 面料tab切换
        $("#modal-chose").on("click", ".header-item", function(e) {
@@ -201,7 +206,7 @@ define([
            var name = self.attr('data-name');
            var type = self.attr('data-type');
 
-           $(".entry-img-item.active").removeClass("active");
+           $("#modal-chose").find(".entry-img-item.active").removeClass("active");
            self.addClass("active");
 
            $("#select_fab_img").attr("src", self.find("img").attr("src"));
@@ -342,20 +347,28 @@ define([
         });
         $("#form-tab3").validate({
             'rules': {
-                '4-3': {
+                '4-2': {
+                    required: true,
                     min: 10,
-                    max: 100,
-                    number: true
+                    max: 100
+                    // number: true
+                },
+                '4-3': {
+                    required: true,
+                    min: 10,
+                    max: 100
+                    // number: true
                 },
                 '4-4': {
-                    min: 10,
-                    max: 100,
-                    number: true
-                },
-                '4-5': {
+                    required: true,
                     min: 15,
-                    max: 70,
-                    number: true
+                    max: 70
+                    // number: true
+                }
+                ,
+                '4-5': {
+                    required: true,
+                    isNotFace: true
                 }
             }
         });
@@ -391,6 +404,7 @@ define([
                     isNotFace: true
                 },
                 '6-5': {
+                    required: true,
                     maxlength: 255,
                     isNotFace: true
                 }
@@ -446,11 +460,11 @@ define([
     }
 
     function validatePage3() {
-        return $('#form-tab2').valid();
+        return $('#form-tab3').valid();
     }
 
     function validatePage4() {
-        return $('#form-tab4').valid();
+        return $('#form-tab4').valid() && $("#4-5").find(".active").attr("data-code");
     }
 
     function validatePage5() {

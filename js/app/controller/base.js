@@ -76,8 +76,8 @@ define([
         formatDate: function(date, format){
             if(!date)
                 return "--";
-            if(typeof date == "string")
-                date = date.replace(/(12:\d\d:\d\d\s)AM$/, "$1PM");
+            // if(typeof date == "string")
+            //     date = date.replace(/(12:\d\d:\d\d\s)AM$/, "$1PM");
             return new Date(date).format(format || "yyyy-MM-dd");
         },
         getImg: function(pic){

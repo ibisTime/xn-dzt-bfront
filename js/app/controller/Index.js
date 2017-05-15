@@ -11,7 +11,6 @@ define([
 	var userPic;//头像
 	var token;
 
-
 	var userImg = __inline("../../../images/头像.png");
 	Ajax.get("805056",{"userId":userId})
 		.then(function(res) {
@@ -32,8 +31,9 @@ define([
             }
         })
 
+
 	$("#h-orderTrick").on('click', function(){
-		location.href = "order/myOrder.html"
+		location.href = "order/myOrder.html";
 	});
 
 	$("#h-commissionManage").on('click', function(){
@@ -69,5 +69,6 @@ define([
 	$("#revise-tpwd").on('click', function(){
 		location.href = "user/revisetPwd.html";
 	});
+
 
 });

@@ -42,8 +42,8 @@ define([
 				timer = setInterval(function(){
 					codeTimeNum--;
 
-					$("#newTelCode").css({"color":"#999"})
-					$("#newTelCode").html("重新发送("+codeTimeNum+")");
+					$("#newTelCode").css({"color":"#999","text-align":"center"})
+					$("#newTelCode").html(""+codeTimeNum+"s");
 
 					if(codeTimeNum<0){
 						clearInterval(timer);
@@ -56,7 +56,7 @@ define([
 				var parem={
 					"mobile":newTel,
 					"bizType":"805048",
-		            "kind": "f2"
+          "kind": "f2"
 				}
 
 				Ajax.post("805904",{json:parem})
@@ -111,7 +111,7 @@ define([
 	                if (res.success) {
 	                	if(res.data.isSuccess){
 	                		base.logout();
-							location.href = "user/login.html"
+								location.href = "login.html"
 	                	}
 	                } else {
 	                	base.showMsg("验证失败");

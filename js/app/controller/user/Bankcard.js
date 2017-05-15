@@ -1,9 +1,11 @@
 define([
     'js/app/controller/base',
     'js/app/util/ajax',
-    'js/app/module/loading/loading'
-], function (base, Ajax, loading) {
+    'js/app/module/loading/loading',
+    'js/app/module/addOrEditBankCard'
+], function (base, Ajax, loading,AddOrEditBankCard) {
     var code = "";
+    var first = 1;
     init();
     function init(){
         loading.createLoading();
@@ -20,14 +22,26 @@ define([
             if(res.success){
                 if(res.data.length){
                     var html = "", item = res.data[0];
-                    code = item.code;
-                    html = '<img src="../../../images/通用银行@2x.png" class="bank-logo p-a">'+
+                    code = $("#edit").attr("code",item.code);
+                    html += '<img src="/static/images/通用银行@2x.png" class="bank-logo p-a">'+
                     		'<div class="inline_block white va pl30 bank-mass p-a">'+
-                    			'<div class="fs32">'+item.bankName+'</div>'+
-                    			'<div class="fs28">储蓄卡</div>'+
-                    			'<div class="fs40 pt30">'+base.getBankCard(item.bankcardNumber)+'</div>'+
+                    			'<div class="fs16">'+item.bankName+'</div>'+
+                    			'<div class="fs14">储蓄卡</div>'+
+                    			'<div class="fs14 pt30">'+base.getBankCard(item.bankcardNumber)+'</div>'+
                     		'</div>';
                     $("#content").html(html);
+                    if(first){
+                        AddOrEditBankCard.addCont({
+                            code: code,
+                            success: function(bankcardNumber, bankName){
+                                loading.createLoading();
+                                getBankCardList();
+                            },
+                            error: function(msg){
+                                base.showMsg(msg);
+                            }
+                        });
+                    }
                 }else{
                     base.showMsg("暂无银行卡");
                 }
@@ -39,7 +53,8 @@ define([
     function addListeners(){
         $("#edit").on("click", function(){
             if(code)
-                location.href = "./add_bankcard.html";
+                AddOrEditBankCard.showCont();
+                location.href = "./add_bankcard.html?code="+$(this).attr("code");
         });
     }
 });

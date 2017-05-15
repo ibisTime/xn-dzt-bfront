@@ -16,7 +16,7 @@ define([
                 base.showMsg(res.msg);
             }
         }, function() {
-            base.showMsg("入住失败");
+            base.showMsg("失败");
         })
 	
 });

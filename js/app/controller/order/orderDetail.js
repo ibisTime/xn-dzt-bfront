@@ -33,6 +33,7 @@ define([
                 $("#applyNote").html(data.applyNote || "无");
                 $("#createDatetime").html(base.formatDate(data.createDatetime, "yyyy-MM-dd hh:mm"));
                 $("#status").html(orderStatus[data.status]);
+                $(".ltBtn").attr('data-ltuser',data.ltUser);
                 if(data.ltUserDO){
                     $("#ltMobileWrap, #ltRealNameWrap").removeClass("hidden");
                     $("#ltRealName").html(data.ltUserDO.realName);
@@ -52,4 +53,17 @@ define([
         }
         return addr.ltProvince + addr.ltCity + addr.ltArea + addr.ltAddress;
     }
+
+
+    function isbtn(){
+        if (status == 1) {
+            $('.ltBtn').html('<input type="button" value="确认量体" class="but wp100 fs16" id="ltSub">');
+
+            $('.ltBtn').on('click',function(){
+                location.href = "liangTiConfirm.html?code="+ code +"&ltUser="+$(this).attr("data-ltuser");
+            })
+
+        }
+    }
+
 });

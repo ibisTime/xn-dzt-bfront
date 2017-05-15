@@ -48,7 +48,7 @@ define([
 
             Ajax.post("805043", { json: param })
                 .then(function(res) {
-                    console.log(res);
+                    // console.log(res);
                     loading.hideLoading();
                     if (res.success) {
                         base.setSessionUser(res);
