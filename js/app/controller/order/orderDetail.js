@@ -37,7 +37,7 @@ define([
                 if(data.ltUserDO){
                     $("#ltMobileWrap, #ltRealNameWrap").removeClass("hidden");
                     $("#ltRealName").html(data.ltUserDO.realName);
-                    $("#ltMobile").html(data.ltUserDO.mobile);
+                    $("#ltMobile").html(data.ltUserDO.mobile).attr("href","tel://"+data.ltUserDO.mobile);
                 }
             }else{
                 base.showMsg(res.msg);

@@ -16,12 +16,8 @@ define([
 	Ajax.get("620007")
 		.then(function(res) {
             if (res.success){
-            	$("#price0").html(res.data[0].price/1000).closest(".param").attr("data-price",res.data[0].price);
-            	$("#price1").html(res.data[1].price/1000).closest(".param").attr("data-price",res.data[1].price);
-            	$("#price0").html(res.data[0].price/1000).closest(".param").attr("data-code",res.data[0].code);
-            	$("#price1").html(res.data[1].price/1000).closest(".param").attr("data-code",res.data[1].code);
-
-
+            	$("#price0").html(res.data[0].price/1000).closest(".param").attr({"data-price":res.data[0].price,"data-code":res.data[0].code});
+            	$("#price1").html(res.data[1].price/1000).closest(".param").attr({"data-price":res.data[1].price,"data-code":res.data[1].code});
             } else {
                 base.showMsg(res.msg);
             }
@@ -52,7 +48,5 @@ define([
 		            }
 		        })
 
-			}
-		);
-
+			});
 });

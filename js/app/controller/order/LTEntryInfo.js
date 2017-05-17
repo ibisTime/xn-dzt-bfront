@@ -12,6 +12,7 @@ define([
         "1-9",
         "1-10",
         "1-11",
+        "2-19",
         "3-5",
         "3-6",
         "3-7",
@@ -177,6 +178,7 @@ define([
             self.addClass("active").siblings(".active").removeClass("active");
             id = self.closest(".am-flexbox").attr("id");
             param[id] = self.attr("data-code");
+            versionChose();
         });
         // 点击选择面料按钮，弹出面料选择框
        $("#choseML").click(function(e) {
@@ -269,6 +271,56 @@ define([
                 saveData(data);
             }
         });
+        versionChose();
+        function versionChose(){
+            var datacode = 001;
+            datacode = $("#2-19").find('.active').attr("data-code");
+            if (datacode == 001) {
+                $("#2-1").on("blur",function () {
+                    var value = $("#2-1").val()
+                    $("#2-10").val(value);
+                    $("#2-11").val(Number(value*0.1)+Number(value));
+                    $("#2-2").val(Number(value*0.1)+Number(value));
+                    $("#2-12").val(Number(value*0.1)+Number(value));
+                    $("#2-3").val(Number(value*0.1)+Number(value));
+                    $("#2-13").val(Number(value)-2);
+                    $("#2-4").val(Number(value)-2);
+                    $("#2-14").val(value);
+                    $("#2-5").val(value);
+                    $("#2-15").val(value);
+                    $("#2-6").val(value);  
+                    $("#2-16").val(value);
+                    $("#2-7").val(value);
+                    $("#2-17").val(Number(value)+9);
+                    $("#2-8").val(Number(value)+9);
+                    $("#2-18").val(Number(value)+6);
+                    $("#2-9").val(Number(value)+6);
+                })
+            }else if (datacode == 002) {
+                $("#2-1").on("blur",function () {
+                    var value = $("#2-1").val()
+                    $("#2-10").val(value);
+                    $("#2-11").val(Number(value*0.08)+Number(value));
+                    $("#2-2").val(Number(value*0.08)+Number(value));
+                    $("#2-12").val(Number(value*0.07)+Number(value));
+                    $("#2-3").val(Number(value*0.07)+Number(value));
+                    $("#2-13").val(Number(value)-4);
+                    $("#2-4").val(Number(value)-4);
+                    $("#2-14").val(value);
+                    $("#2-5").val(value);
+                    $("#2-15").val(value);
+                    $("#2-6").val(value);  
+                    $("#2-16").val(value);
+                    $("#2-7").val(value);
+                    $("#2-17").val(Number(value)+7);
+                    $("#2-8").val(Number(value)+7);
+                    $("#2-18").val(Number(value)+5);
+                    $("#2-9").val(Number(value)+5);
+                }) 
+            }
+        }
+                
+        
         $("#form-tab2").validate({
             'rules': {
                 '2-1': {
@@ -348,19 +400,19 @@ define([
         $("#form-tab3").validate({
             'rules': {
                 '4-2': {
-                    required: true,
+                    // required: true,
                     min: 10,
                     max: 100
                     // number: true
                 },
                 '4-3': {
-                    required: true,
+                    // required: true,
                     min: 10,
                     max: 100
                     // number: true
                 },
                 '4-4': {
-                    required: true,
+                    // required: true,
                     min: 15,
                     max: 70
                     // number: true
@@ -375,7 +427,7 @@ define([
         $("#form-tab4").validate({
             'rules': {
                 '5-1': {
-                    required: true,
+                    // required: true,
                     maxlength: 60,
                     isNotFace: true
                 }
@@ -438,6 +490,7 @@ define([
             id = "4-1";
         }else if(index == 3){
             id = "5-1";
+            $("#form-tab4").find(".active").removeClass("active")
         }else if(index == 4){
             id = "6-1";
         }
