@@ -253,3 +253,78 @@
     position: relative;
     z-index: -10;
 }*/
+
+/**
+ *
+ * 下拉样式 Pull down styles
+ *
+ */
+
+.scroll-wrapper {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    top: 45px;
+    width: 100%;
+}
+
+.scroll-scroll {
+    position: relative;
+}
+
+@-webkit-keyframes bouncedelay {
+    0%, 80%, 100% {
+        -webkit-transform: scale(0.0)
+    }
+    40% {
+        -webkit-transform: scale(1.0)
+    }
+}
+
+@keyframes bouncedelay {
+    0%, 80%, 100% {
+        transform: scale(0.0);
+        -webkit-transform: scale(0.0);
+    }
+    40% {
+        transform: scale(1.0);
+        -webkit-transform: scale(1.0);
+    }
+}
+
+.pullDownLabel, .pullUpLabel {
+    width: 100%;
+    clear: both;
+    height: 30px;
+    text-align: center;
+    position: relative;
+}
+
+.pullDownLabel>div, .pullUpLabel>div {
+    width: 10px;
+    height: 10px;
+    background-color: #06cdb8;
+    border-radius: 100%;
+    display: inline-block;
+    -webkit-animation: bouncedelay 1.4s infinite ease-in-out;
+    animation: bouncedelay 1.4s infinite ease-in-out;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    margin-top: 10px;
+}
+
+.pullDownLabel .bounce1, .pullUpLabel .bounce1 {
+    -webkit-animation-delay: -.3s;
+    animation-delay: -.3s;
+}
+
+.pullDownLabel .bounce2, .pullUpLabel .bounce2 {
+    -webkit-animation-delay: -.2s;
+    animation-delay: -.2s;
+}
+
+.pullDownLabel .bounce3, .pullUpLabel .bounce3 {
+    -webkit-animation-delay: -.1s;
+    animation-delay: -.1s;
+}
+.top{top: 0;}

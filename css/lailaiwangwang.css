@@ -19,6 +19,7 @@
 .hig300{height:3rem;}
 .hig500{height:5rem;}
 */
+.minhig{min-height: 100%}
 .hig1000{height:10rem;}
 .ba{background-color:#ffffff;}
 .bc{background-color:#f2f2f2;}
@@ -37,6 +38,7 @@
 .hig190{height:190px;}
 .hig180{height:180px;}
 .hig100{height:1rem;}
+.hig{height:100%;}
 .p-a{position:absolute;}
 .p-r{position:relative;}
 .p-f{position: fixed;}

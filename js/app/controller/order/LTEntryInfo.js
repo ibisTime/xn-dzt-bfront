@@ -49,6 +49,7 @@ define([
         productSpecsList;
     var param = {};
     var allData = {};
+    var flag = 0; 
     init();
     function init() {
         getInitData().then(getInfo);
@@ -111,7 +112,19 @@ define([
             } else {
                 $("#" + spec.parentCode).val(spec.code);
             }
-        })
+        });
+        productSpecsList.forEach(function(v, i) {
+            if (v.parentCode == "5-1") {
+                flag = 1;
+            }
+        });
+        if(flag){
+            $("#form-tab4 .styleChose").removeClass("hidden")
+        }else{
+            $("#form-tab4 .styleChose").addClass("hidden").find(".active").removeClass("active");
+            $("#5-1").val("");
+            $("#5-5").find("[data-code='004']").click();
+        }
     }
     // 创建5个tab页的初始化内容
     function createPage1() {
@@ -179,6 +192,7 @@ define([
             id = self.closest(".am-flexbox").attr("id");
             param[id] = self.attr("data-code");
             versionChose();
+            embroideryChose()
         });
         // 点击选择面料按钮，弹出面料选择框
        $("#choseML").click(function(e) {
@@ -226,6 +240,7 @@ define([
        $("#goNextStep1").on("click", function() {
             if (validatePage1()) {
                 goPage(1);
+                versionChose();
             }
         });
         $("#goNextStep2").on("click", function() {
@@ -271,55 +286,131 @@ define([
                 saveData(data);
             }
         });
-        versionChose();
+        function changeListener(obj){
+            $(obj.dom).on("blur",function () {
+                var value = $(obj.dom).val();
+                obj.dom? value:$(obj.dom).val("");
+                obj.dom0? $(obj.dom0).val(value) : $(obj.dom0).val("");
+                obj.dom1 && value ? $(obj.dom1).val(Number(value*0.1)+Number(value)) : $(obj.dom1).val("");
+                obj.dom2 && value ? $(obj.dom2).val(Number(value)-2):$(obj.dom2).val("");
+                obj.dom3 && value ? $(obj.dom3).val(Number(value)+9):$(obj.dom3).val("");
+                obj.dom4 && value ? $(obj.dom4).val(Number(value)+6):$(obj.dom4).val("");
+                obj.dom5 && value ? $(obj.dom5).val(Number(value*0.08)+Number(value)):$(obj.dom5).val("");
+                obj.dom6 && value ? $(obj.dom6).val(Number(value*0.07)+Number(value)):$(obj.dom6).val("");
+                obj.dom7 && value ? $(obj.dom7).val(Number(value)-4):$(obj.dom7).val("");
+                obj.dom8 && value ? $(obj.dom8).val(Number(value)+7):$(obj.dom8).val("");
+                obj.dom9 && value ? $(obj.dom9).val(Number(value)+5):$(obj.dom9).val("");
+            })
+        }
+        
         function versionChose(){
             var datacode = 001;
             datacode = $("#2-19").find('.active').attr("data-code");
             if (datacode == 001) {
-                $("#2-1").on("blur",function () {
-                    var value = $("#2-1").val()
-                    $("#2-10").val(value);
-                    $("#2-11").val(Number(value*0.1)+Number(value));
-                    $("#2-2").val(Number(value*0.1)+Number(value));
-                    $("#2-12").val(Number(value*0.1)+Number(value));
-                    $("#2-3").val(Number(value*0.1)+Number(value));
-                    $("#2-13").val(Number(value)-2);
-                    $("#2-4").val(Number(value)-2);
-                    $("#2-14").val(value);
-                    $("#2-5").val(value);
-                    $("#2-15").val(value);
-                    $("#2-6").val(value);  
-                    $("#2-16").val(value);
-                    $("#2-7").val(value);
-                    $("#2-17").val(Number(value)+9);
-                    $("#2-8").val(Number(value)+9);
-                    $("#2-18").val(Number(value)+6);
-                    $("#2-9").val(Number(value)+6);
-                })
+                changeListener({
+                    dom: "#2-1",
+                    dom0: "#2-10"
+                });
+                changeListener({
+                    dom: "#2-2",
+                    dom1: "#2-11"
+                });
+                changeListener({
+                    dom: "#2-3",
+                    dom1: "#2-12"
+                });
+
+                changeListener({
+                    dom: "#2-4",
+                    dom2: "#2-13"
+                });
+                changeListener({
+                    dom: "#2-5",
+                    dom0: "#2-14"
+                });
+                changeListener({
+                    dom: "#2-6",
+                    dom0: "#2-15"
+                });
+                changeListener({
+                    dom: "#2-7",
+                    dom0: "#2-16"
+                });
+                changeListener({
+                    dom: "#2-8",
+                    dom3: "#2-17"
+                });
+                changeListener({
+                    dom: "#2-9",
+                    dom4: "#2-18"
+                });
             }else if (datacode == 002) {
-                $("#2-1").on("blur",function () {
-                    var value = $("#2-1").val()
-                    $("#2-10").val(value);
-                    $("#2-11").val(Number(value*0.08)+Number(value));
-                    $("#2-2").val(Number(value*0.08)+Number(value));
-                    $("#2-12").val(Number(value*0.07)+Number(value));
-                    $("#2-3").val(Number(value*0.07)+Number(value));
-                    $("#2-13").val(Number(value)-4);
-                    $("#2-4").val(Number(value)-4);
-                    $("#2-14").val(value);
-                    $("#2-5").val(value);
-                    $("#2-15").val(value);
-                    $("#2-6").val(value);  
-                    $("#2-16").val(value);
-                    $("#2-7").val(value);
-                    $("#2-17").val(Number(value)+7);
-                    $("#2-8").val(Number(value)+7);
-                    $("#2-18").val(Number(value)+5);
-                    $("#2-9").val(Number(value)+5);
-                }) 
+                changeListener({
+                    dom: "#2-1",
+                    dom0: "#2-10"
+                });
+                changeListener({
+                    dom: "#2-2",
+                    dom5: "#2-11"
+                });
+                changeListener({
+                    dom: "#2-3",
+                    dom6: "#2-12"
+                });
+
+                changeListener({
+                    dom: "#2-4",
+                    dom7: "#2-13"
+                });
+                changeListener({
+                    dom: "#2-5",
+                    dom0: "#2-14"
+                });
+                changeListener({
+                    dom: "#2-6",
+                    dom0: "#2-15"
+                });
+                changeListener({
+                    dom: "#2-7",
+                    dom0: "#2-16"
+                });
+                changeListener({
+                    dom: "#2-8",
+                    dom8: "#2-17"
+                });
+                changeListener({
+                    dom: "#2-9",
+                    dom9: "#2-18"
+                });
             }
         }
-                
+        function embroideryChose(){
+                var datacode = $("#5-5").find('.active').attr("data-code");
+            if (datacode == "003") {
+                $("#form-tab4 .styleChose").removeClass("hidden")
+                $("#form-tab4").validate({
+                    'rules': {
+                        '5-1': {
+                            requnbired: true,
+                            maxlength: 60,
+                            isNotFace: true
+                        }
+                    }
+                });
+            }else if(datacode == "004"){
+                $("#form-tab4 .styleChose").addClass("hidden").find(".active").removeClass("active");
+                $("#5-1").val("");
+                $("#form-tab4").validate({
+                    'rules': {
+                        '5-1': {
+                            // required: true,
+                            maxlength: 60,
+                            isNotFace: true
+                        }
+                    }
+                });
+            }
+        }     
         
         $("#form-tab2").validate({
             'rules': {
@@ -427,7 +518,7 @@ define([
         $("#form-tab4").validate({
             'rules': {
                 '5-1': {
-                    // required: true,
+                    required: true,
                     maxlength: 60,
                     isNotFace: true
                 }
@@ -490,7 +581,6 @@ define([
             id = "4-1";
         }else if(index == 3){
             id = "5-1";
-            $("#form-tab4").find(".active").removeClass("active")
         }else if(index == 4){
             id = "6-1";
         }

@@ -5,7 +5,9 @@ define([
     'js/app/module/validate/validate'
 ], function(base, Ajax, loading, Validate) {
     var accountNumber, availableAmount;
-
+    var userId = base.getUserId();
+    var payCardInfo = "";
+    var payCardNo ="";
     init();
     function init(){
         loading.createLoading();
@@ -37,7 +39,8 @@ define([
                 if(res.data.length){
                     var html = "";
                     $.each(res.data, function(i, item){
-                        html += '<option value='+item.bankcardNumber+'>'+item.bankName+' - '+item.bankcardNumber+'</option>';
+                        html += '<option bankCode="'+item.bankCode+ '"value="'+item.bankcardNumber+'">'+item.bankName+' - '+item.bankcardNumber+'</option>';
+                        console.log(html)
                     });
                     $("#BankCard").removeClass("hidden");
                     $("#bankcardNumber").html(html);
@@ -69,7 +72,7 @@ define([
                 $.each(data, function (i, d) {
                     if(d.currency == "CNY"){
                         accountNumber = d.accountNumber;
-                        $("#amount").html(base.formatMoney(d.amount));
+                        $("#amountPrompt").html(base.formatMoney(d.amount));
                         availableAmount = d.amount;
                     }
                 });
@@ -110,32 +113,29 @@ define([
     }
     // 取现
     function withdraw(){
-        var param = $("#withdrawForm").serializeObject();
-        param.transAmount = +param.transAmount * 1000;
-        if(+availableAmount < param.transAmount){
-            base.showMsg("提现金额不能大于可用余额");
-            return;
-        }
-        param.transAmount = -param.transAmount;
-        param.accountNumber = accountNumber;
-
-        // if (!param.bankcardNumber) {
-        //     base.showMsg('请先绑定银行卡');
-        // }
-        loading.createLoading("提交中...");
-        Ajax.post("802526", {json: param})
-            .then(function(res){
-                loading.hideLoading();
-                if(res.success){
-                    base.showMsg("操作成功");
-                    setTimeout(function(){
-                        history.back();
-                    }, 1000);
-                }else if(res.msg == "必填型入参，请按要求填写完整"){
-                    base.showMsg('请先绑定银行卡');
-                }else{
-                    base.showMsg(res.msg);
-                }
-            });
+       var param = $("#withdrawForm").serializeObject();
+       param.amount = +param.amount * 1000;
+       if(+availableAmount < param.amount){
+           base.showMsg("提现金额不能大于可用余额");
+           return;
+       }
+       param.amount = param.amount;
+       param.accountNumber = accountNumber;
+       param.payCardInfo = $("#bankcardNumber").find("option:selected").attr("bankCode");
+       param.payCardNo = $("#bankcardNumber").find("option:selected").attr("value");
+       param.applyUser = userId;
+       loading.createLoading("提交中...");
+       Ajax.post("802750", {json: param})
+           .then(function(res){
+               loading.hideLoading();
+               if(res.success){
+                   base.showMsg("操作成功");
+                   setTimeout(function(){
+                       history.back();
+                   }, 1000);
+               }else{
+                   base.showMsg(res.msg);
+               }
+           });
     }
 })
