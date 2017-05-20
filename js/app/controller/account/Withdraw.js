@@ -39,7 +39,7 @@ define([
                 if(res.data.length){
                     var html = "";
                     $.each(res.data, function(i, item){
-                        html += '<option bankCode="'+item.bankCode+ '"value="'+item.bankcardNumber+'">'+item.bankName+' - '+item.bankcardNumber+'</option>';
+                        html += '<option bankName="'+item.bankName+ '"value="'+item.bankcardNumber+'">'+item.bankName+' - '+item.bankcardNumber+'</option>';
                         console.log(html)
                     });
                     $("#BankCard").removeClass("hidden");
@@ -121,7 +121,7 @@ define([
        }
        param.amount = param.amount;
        param.accountNumber = accountNumber;
-       param.payCardInfo = $("#bankcardNumber").find("option:selected").attr("bankCode");
+       param.payCardInfo = $("#bankcardNumber").find("option:selected").attr("bankName");
        param.payCardNo = $("#bankcardNumber").find("option:selected").attr("value");
        param.applyUser = userId;
        loading.createLoading("提交中...");

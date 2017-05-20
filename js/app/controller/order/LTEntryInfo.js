@@ -320,10 +320,14 @@ define([
                     dom1: "#2-12"
                 });
 
-                changeListener({
-                    dom: "#2-4",
-                    dom2: "#2-13"
-                });
+                // changeListener({
+                //     dom: "#2-4",
+                //     dom2: "#2-13"
+                // });
+                $("#2-4").on("blur",function () {
+                  $("#2-13").val(Number($("#2-11").val()) -2);
+                })
+
                 changeListener({
                     dom: "#2-5",
                     dom0: "#2-14"
@@ -358,10 +362,13 @@ define([
                     dom6: "#2-12"
                 });
 
-                changeListener({
-                    dom: "#2-4",
-                    dom7: "#2-13"
-                });
+                // changeListener({
+                //     dom: "#2_11",
+                //     dom7: "#2-13"
+                // });
+                $("#2-4").on("blur",function () {
+                  $("#2-13").val(Number($("#2-11").val()) -4);
+                })
                 changeListener({
                     dom: "#2-5",
                     dom0: "#2-14"
