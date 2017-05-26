@@ -230,17 +230,22 @@
 
 /*银行卡*/
 .revise{position:absolute;right:0.6rem;}
-.bank{background:url(../images/工商背景.png)  no-repeat center;overflow-y: visible;}
+.bank{background:url(../images/工商背景.png)  no-repeat center;overflow-y: visible;background-size: cover;border-radius: 10px;}
+.bank:after{
+	content: "";
+	width: 0;
+	height: 100%;
+	vertical-align: middle;
+	display: inline-block;
+}
 .hig260{height:2.6rem;}
-.bank-logo{width:2.5rem;left:10%;top: 25%;}
+.bank-logo{width:2.5rem;left: 1.4rem;top: 25%;}
 .fs40{font-size:0.4rem;}
-.bank-mass{ top: 50%;left:20%;
-    position: absolute;
-    transform: translateY(-50%);
--ms-transform:translateY(-50%); 	/* IE 9 */
--moz-transform:translateY(-50%); 	/* Firefox */
--webkit-transform:translateY(-50%); /* Safari 和 Chrome */
--o-transform:translateY(-50%); 	/* Opera */}
+.bank-mass{ 
+    padding-left: 5rem;
+    vertical-align: middle;
+    background: transparent;
+}
 .mt45{margin-top:0.45rem;}
 .ml45{margin-left:0.45rem;}
 

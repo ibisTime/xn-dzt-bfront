@@ -78,9 +78,8 @@ label.error {
     display: block;
     position: absolute;
     white-space: nowrap;
-    right: 10px;
-    top: 5px;
     color: #f55555;
+    font-size: 12px;
 }
 #form-tab2.error {
     display: block;

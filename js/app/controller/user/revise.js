@@ -101,7 +101,7 @@ define([
 			    // "tradePwd":tradePwd
 				}
 
-	        console.log(userId,newTel,newCode)
+	        // console.log(userId,newTel,newCode)
 			Ajax.post("805047",{json:parem})
 				.then(function(res) {
 	                if (res.success) {

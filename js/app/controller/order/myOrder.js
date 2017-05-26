@@ -117,6 +117,7 @@ define([
                   html += '<div class=" wp100 p-r mb50 ">'+
                   '<div class="  wp100 p-r bg_fff border-b pb10 detail"code="'+item.code+'">'+
                               '<div class=" ba lh100  plr15  p-r pt10"><img src="/static/images/订单号@2x.png" class="img-order"><p class="co9 inline_block  p-a ml20 fs13">订单号：' + item.code + '</p><span class="p-a font fs12">' + base.getDictListValue(item.status,dictData) + '</span></div>'+
+                              '<div class="ba lh100  plr15  p-r mt10"><img src="/static/images/图层-6@2x.png" class="img-order"><p class="co9 inline_block  p-a ml20 fs13">客户姓名：' + item.applyName + '</p></div>'+
                               '<div class="ba lh100  plr15  p-r mt10"><img src="/static/images/电话@2x.png" class="img-order"><p class="co9 inline_block  p-a ml20 fs13">联系电话：' + item.applyMobile + '</p></div>'+
                               '<div class="ba lh100  plr15  p-r mt10"><img src="/static/images/地址@2x.png" class="img-order p-a"><p class="co9 inline_block  p-r ml35 fs13">地址：' + item.ltProvince + item.ltCity + item.ltArea + item.ltAddress +'</p></div>'+
                               '<div class="ba lh100  plr15  p-r mt10 pb12"><img src="/static/images/时间@2x.png" class="img-order"><p class="co9 inline_block  p-a ml20 fs13">预约时间：' + base.formatDate(item.ltDatetime,"yyyy-MM-dd") + '</p></div>'+

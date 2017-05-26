@@ -15,6 +15,7 @@ define([
         }else{  // 修改银行卡
             getEditInitData();
         }
+
     }
     // 获取添加银行卡初始化数据
     function getAddInitData() {
@@ -72,6 +73,22 @@ define([
         });
     }
     function addListeners(){
+        $.validator.setDefaults({
+            errorPlacement: function(error, element) {
+                error
+                    .css({
+                        position: "absolute",
+                        "white-space": "nowrap",
+                        color: "#f55555",
+                        "font-size": "12px",
+                        display: "block",
+                        top: "5px",
+                        right: "10px"
+                    })
+                    .insertAfter(element);
+            }
+        });
+        
         $("#bankCardForm").validate({
             'rules': {
                 realName: {
@@ -101,7 +118,6 @@ define([
         $("#sbtn").on("click", function(){
             if($("#bankCardForm").valid()){
                 if(code){
-                    console.log(11)
                     editBankCard();
                 }else{
                     addBankCard();
@@ -142,11 +158,12 @@ define([
                 if(res.success){
                     base.showMsg("修改银行卡成功");
                     setTimeout(function(){
-                        history.back();
+                        location.href = "./bankcard.html?";
                     }, 1000);
                 }else{
                     base.showMsg(res.msg);
                 }
             });
     }
+
 })

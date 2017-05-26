@@ -40,7 +40,7 @@ define([
                     var html = "";
                     $.each(res.data, function(i, item){
                         html += '<option bankName="'+item.bankName+ '"value="'+item.bankcardNumber+'">'+item.bankName+' - '+item.bankcardNumber+'</option>';
-                        console.log(html)
+                        // console.log(html)
                     });
                     $("#BankCard").removeClass("hidden");
                     $("#bankcardNumber").html(html);
@@ -84,6 +84,22 @@ define([
         });
     }
     function addListeners(){
+        $.validator.setDefaults({
+            errorPlacement: function(error, element) {
+                error
+                    .css({
+                        position: "absolute",
+                        "white-space": "nowrap",
+                        color: "#f55555",
+                        "font-size": "12px",
+                        display: "block",
+                        top: "5px",
+                        right: "10px"
+                    })
+                    .insertAfter(element);
+            }
+        });
+        
         $("#withdrawForm").validate({
             'rules': {
                 bankcardNumber: {
@@ -138,4 +154,6 @@ define([
                }
            });
     }
+
+    
 })

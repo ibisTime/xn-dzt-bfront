@@ -17,6 +17,22 @@ define([
     }
 
     function addListeners() {
+        $.validator.setDefaults({
+            errorPlacement: function(error, element) {
+                error
+                    .css({
+                        position: "absolute",
+                        "white-space": "nowrap",
+                        color: "#f55555",
+                        "font-size": "12px",
+                        display: "block",
+                        top: "5px",
+                        right: "10px"
+                    })
+                    .insertAfter(element);
+            }
+        });
+        
         $("#loginForm").validate({
             'rules': {
                 mobile: {

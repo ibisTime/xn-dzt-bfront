@@ -93,6 +93,7 @@ define([
             if (!allData[parentCode]) {
                 allData[parentCode] = [];
             }
+
             allData[parentCode].push(arr[i]);
         }
         createPage1();
@@ -143,7 +144,7 @@ define([
         var data = allData[option.type];
         var html = "";
         for (var i = 0; i < data.length; i++) {
-            html += '<div data-code="' + data[i].code + '" data-name="' + data[i].name + '" data-type="' + data[i].type + '" class="entry-img-item">' + '<div class="entry-img-wrap">' + '<img src="' + base.getImg1(data[i].pic) + '"/>' + '</div>' + data[i].name + '</div>';
+            html += '<div data-code="' + data[i].code + '" data-name="' + data[i].name + '" data-type="' + data[i].type + '" class="entry-img-item">' + '<div class="entry-img-wrap">' + '<img src="' + base.getImg1(data[i].pic) + '"/>' +'<div class = "cover"></div>' + '</div>' + data[i].name + '</div>';
         }
         $("#" + option.id).html(html);
     }
@@ -153,7 +154,14 @@ define([
         if (data) {
             if (data[0].pic) {
                 createImgHtmls(id, data);
-            } else {
+            } else if(id == "1-8"){
+                if (data[0].code > data[1].code) {
+                    var temp = data[0];
+                    data[0] = data[1];
+                    data[1] = temp;
+                }
+                createCheckHtml(id, data);
+            }else{
                 createCheckHtml(id, data);
             }
         }
@@ -163,11 +171,14 @@ define([
         var html = "";
         for (var i = 0; i < data.length; i++) {
             var cls = "entry-img-item param";
+            var cls0 = "cover"
             if (i == 0) {
-                cls += " active";
+                cls += " active ";
+                cls0 += " show"
                 param[id] = data[i].code;
             }
-            html += '<div class="' + cls + '" data-code="' + data[i].code + '">' + '<div class="entry-img-wrap">' + '<img src="' + base.getImg1(data[i].pic) + '"/>' + '</div>' + data[i].name + '</div>';
+            html += '<div class="' + cls + '" data-code="' + data[i].code + '">' + '<div class="entry-img-wrap">' + '<img src="' + base.getImg1(data[i].pic) + '"/>'+'<div class = "'+ cls0 +'"></div>' + '</div>' + data[i].name + '</div>';
+
         }
         $("#" + id).html(html);
     }
@@ -188,7 +199,11 @@ define([
         // 页面参数按钮点击
         $("#entry-content").on("click", ".param", function(e) {
             var self = $(this);
+            self.addClass("active").find(".entry-img-wrap .cover").addClass("show")
+                .parents(".param").siblings(".active").removeClass("active")
+                .find(".entry-img-wrap .cover").removeClass("show");
             self.addClass("active").siblings(".active").removeClass("active");
+               
             id = self.closest(".am-flexbox").attr("id");
             param[id] = self.attr("data-code");
             versionChose();
@@ -211,8 +226,7 @@ define([
            var v_idx = self.index();
            self.addClass("active").siblings(".active").removeClass("active");
            $("#entry-ml-main-cont")
-                .find(".entry-ml-main-cont" + v_idx).addClass("active")
-                .siblings(".active").removeClass("active");
+                .find(".entry-ml-main-cont" + v_idx).addClass("active").siblings(".active").removeClass("active");
        });
        // 面料选择
        $("#modal-chose").on("click", ".entry-img-item", function(e) {
@@ -222,8 +236,9 @@ define([
            var name = self.attr('data-name');
            var type = self.attr('data-type');
 
-           $("#modal-chose").find(".entry-img-item.active").removeClass("active");
-           self.addClass("active");
+           $("#modal-chose").find(".entry-img-item.active").removeClass("active").find(".entry-img-wrap .cover").removeClass("show");;
+           self.addClass("active").find(".entry-img-wrap .cover").addClass("show");
+                
 
            $("#select_fab_img").attr("src", self.find("img").attr("src"));
            $("#selected_fab_info_title").html(name);
@@ -240,7 +255,7 @@ define([
        $("#goNextStep1").on("click", function() {
             if (validatePage1()) {
                 goPage(1);
-                versionChose();
+                // versionChose();
             }
         });
         $("#goNextStep2").on("click", function() {
@@ -286,23 +301,27 @@ define([
                 saveData(data);
             }
         });
+        $("#createSize").on("click",function () {
+            versionChose()
+            if (validatePage2()) {
+                return false;
+            }
+        });
         function changeListener(obj){
-            $(obj.dom).on("blur",function () {
-                var value = $(obj.dom).val();
-                obj.dom? value:$(obj.dom).val("");
-                obj.dom0? $(obj.dom0).val(value) : $(obj.dom0).val("");
-                obj.dom1 && value ? $(obj.dom1).val(Number(value*0.1)+Number(value)) : $(obj.dom1).val("");
-                obj.dom2 && value ? $(obj.dom2).val(Number(value)-2):$(obj.dom2).val("");
-                obj.dom3 && value ? $(obj.dom3).val(Number(value)+9):$(obj.dom3).val("");
-                obj.dom4 && value ? $(obj.dom4).val(Number(value)+6):$(obj.dom4).val("");
-                obj.dom5 && value ? $(obj.dom5).val(Number(value*0.08)+Number(value)):$(obj.dom5).val("");
-                obj.dom6 && value ? $(obj.dom6).val(Number(value*0.07)+Number(value)):$(obj.dom6).val("");
-                obj.dom7 && value ? $(obj.dom7).val(Number(value)-4):$(obj.dom7).val("");
-                obj.dom8 && value ? $(obj.dom8).val(Number(value)+7):$(obj.dom8).val("");
-                obj.dom9 && value ? $(obj.dom9).val(Number(value)+5):$(obj.dom9).val("");
-            })
+           var value = $(obj.dom).val();               
+           obj.dom? value:$(obj.dom).val("");
+           obj.dom0? $(obj.dom0).val(value) : $(obj.dom0).val("");
+           obj.dom1 && value ? $(obj.dom1).val(Number(value*0.1)+Number(value)) : $(obj.dom1).val("");
+           obj.dom2 && value ? $(obj.dom2).val(Number(value)-2):$(obj.dom2).val("");
+           obj.dom3 && value ? $(obj.dom3).val(Number(value)+9):$(obj.dom3).val("");
+           obj.dom4 && value ? $(obj.dom4).val(Number(value)+6):$(obj.dom4).val("");
+           obj.dom5 && value ? $(obj.dom5).val(Number(value*0.08)+Number(value)):$(obj.dom5).val("");
+           obj.dom6 && value ? $(obj.dom6).val(Number(value*0.07)+Number(value)):$(obj.dom6).val("");
+           obj.dom7 && value ? $(obj.dom7).val(Number(value)-4):$(obj.dom7).val("");
+           obj.dom8 && value ? $(obj.dom8).val(Number(value)+7):$(obj.dom8).val("");
+           obj.dom9 && value ? $(obj.dom9).val(Number(value)+5):$(obj.dom9).val(""); 
         }
-        
+
         function versionChose(){
             var datacode = 001;
             datacode = $("#2-19").find('.active').attr("data-code");
@@ -320,13 +339,13 @@ define([
                     dom1: "#2-12"
                 });
 
-                // changeListener({
-                //     dom: "#2-4",
-                //     dom2: "#2-13"
-                // });
-                $("#2-4").on("blur",function () {
-                  $("#2-13").val(Number($("#2-11").val()) -2);
-                })
+                changeListener({
+                    dom: "#2-11",
+                    dom2: "#2-13"
+                });
+                // $("#2-4").on("blur",function () {
+                //   $("#2-13").val(Number($("#2-11").val()) -2);
+                // })
 
                 changeListener({
                     dom: "#2-5",
@@ -362,13 +381,13 @@ define([
                     dom6: "#2-12"
                 });
 
-                // changeListener({
-                //     dom: "#2_11",
-                //     dom7: "#2-13"
-                // });
-                $("#2-4").on("blur",function () {
-                  $("#2-13").val(Number($("#2-11").val()) -4);
-                })
+                changeListener({
+                    dom: "#2-11",
+                    dom7: "#2-13"
+                });
+                // $("#2-4").on("blur",function () {
+                //   $("#2-13").val(Number($("#2-11").val()) -4);
+                // })
                 changeListener({
                     dom: "#2-5",
                     dom0: "#2-14"
@@ -405,7 +424,8 @@ define([
                     }
                 });
             }else if(datacode == "004"){
-                $("#form-tab4 .styleChose").addClass("hidden").find(".active").removeClass("active");
+                $("#form-tab4 .styleChose").addClass("hidden");
+                // .find(".active").removeClass("active");
                 $("#5-1").val("");
                 $("#form-tab4").validate({
                     'rules': {
@@ -620,4 +640,5 @@ define([
     function validatePage5() {
         return $('#form-tab5').valid();
     }
+
 });

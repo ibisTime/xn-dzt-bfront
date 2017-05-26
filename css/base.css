@@ -111,6 +111,7 @@ body {
     color: #595959;
     background-color: #f3f3f3;
     line-height: 150%;
+    -webkit-overflow-scrolling: touch;
 }
 
 

@@ -22,9 +22,9 @@ define([
             if(res.success){
                 if(res.data.length){
                     var html = "", item = res.data[0];
-                    code = $("#edit").attr("code",item.code);
+                    code = item.code;
                     html += '<img src="/static/images/通用银行@2x.png" class="bank-logo p-a">'+
-                    		'<div class="inline_block white va pl30 bank-mass p-a">'+
+                    		'<div class="inline_block white va bank-mass">'+
                     			'<div class="fs16">'+item.bankName+'</div>'+
                     			'<div class="fs14">储蓄卡</div>'+
                     			'<div class="fs14 pt30">'+base.getBankCard(item.bankcardNumber)+'</div>'+
@@ -41,6 +41,7 @@ define([
                                 base.showMsg(msg);
                             }
                         });
+                        first = false;
                     }
                 }else{
                     base.showMsg("暂无银行卡");
@@ -50,11 +51,31 @@ define([
             }
         });
     }
+
+
+    
     function addListeners(){
         $("#edit").on("click", function(){
             if(code)
                 AddOrEditBankCard.showCont();
-                location.href = "./add_bankcard.html?code="+$(this).attr("code");
+                loading.hideLoading();
+                location.href = "./add_bankcard.html?code="+code;
+        });
+
+        $.validator.setDefaults({
+            errorPlacement: function(error, element) {
+                error
+                    .css({
+                        position: "absolute",
+                        "white-space": "nowrap",
+                        color: "#f55555",
+                        "font-size": "12px",
+                        display: "block",
+                        top: "5px",
+                        right: "10px"
+                    })
+                    .insertAfter(element);
+            }
         });
     }
 });
